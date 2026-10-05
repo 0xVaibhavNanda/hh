@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Sneha 🤍</title>
+  <meta name="description" content="A handwritten digital love card for Sneha.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+/* ==========================================================================
+   STYLE.CSS - Romantic Apology Digital Love Card for Sneha
+   Mobile-first, soft pastel palette, paper card design, gentle animations.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES & COLOR PALETTE
+   -------------------------------------------------------------------------- */
+:root {
+  --bg-gradient: linear-gradient(135deg, #FFF0F3 0%, #F5E6FF 50%, #FFF5EB 100%);
+  --paper-bg: #FFFDF9;
+  --paper-border: rgba(232, 165, 184, 0.35);
+  
+  --color-blush: #FFE4EC;
+  --color-rose: #E8A5B8;
+  --color-rose-dark: #C96B85;
+  --color-lavender: #EADCFB;
+  --color-cream: #FFFDF9;
+  --color-gold: #D4AF37;
+  --color-gold-light: #F7E7B4;
+  
+  --text-primary: #4A3E43;
+  --text-muted: #7A6970;
+  --text-light: #A39198;
+  
+  --shadow-card: 0 12px 35px rgba(212, 140, 154, 0.18), 0 4px 12px rgba(184, 137, 160, 0.08);
+  --shadow-hover: 0 16px 40px rgba(201, 107, 133, 0.25);
+  --shadow-glow: 0 0 25px rgba(232, 165, 184, 0.5);
+
+  --font-heading: 'Caveat', cursive, sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+  
+  --radius-card: 28px;
+  --radius-btn: 50px;
+  --radius-pill: 20px;
+  
+  --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+  position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   3. BACKGROUND PARTICLES & PETALS OVERLAY
+   -------------------------------------------------------------------------- */
+#particleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.floating-petal {
+  position: absolute;
+  background: radial-gradient(circle, rgba(255, 192, 203, 0.7) 0%, rgba(240, 168, 188, 0.4) 70%);
+  border-radius: 15px 0 15px 0;
+  pointer-events: none;
+  animation: fallAndSway linear infinite;
+}
+
+@keyframes fallAndSway {
+  0% {
+    transform: translateY(-50px) rotate(0deg) translateX(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(30px);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(-20px);
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. MUSIC TOGGLE BUTTON
+   -------------------------------------------------------------------------- */
+.music-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  background: rgba(255, 253, 249, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--paper-border);
+  padding: 8px 16px;
+  border-radius: var(--radius-btn);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(212, 140, 154, 0.2);
+  transition: var(--transition-smooth);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-height: 44px;
+}
+
+.music-toggle:hover, .music-toggle:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 107, 133, 0.3);
+  outline: none;
+}
+
+.music-icon {
+  font-size: 1.1rem;
+  animation: spinSlow 6s linear infinite paused;
+}
+
+.music-toggle.playing .music-icon {
+  animation-play-state: running;
+}
+
+@keyframes spinSlow {
+  100% { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   5. LAYOUT CONTAINER & PROGRESS BAR
+   -------------------------------------------------------------------------- */
+.app-container {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 85vh;
+  justify-content: center;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 6px 12px;
+  background: rgba(255, 253, 249, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(232, 165, 184, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.progress-bar.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-rose);
+  opacity: 0.3;
+  transition: var(--transition-smooth);
+}
+
+.dot.active {
+  opacity: 1;
+  transform: scale(1.35);
+  background: var(--color-rose-dark);
+  box-shadow: 0 0 8px rgba(201, 107, 133, 0.5);
+}
+
+.dot.completed {
+  opacity: 0.7;
+  background: var(--color-rose-dark);
+}
+
+/* --------------------------------------------------------------------------
+   6. SCREEN CARDS & TRANSITIONS
+   -------------------------------------------------------------------------- */
+.screen {
+  display: none;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.paper-card {
+  width: 100%;
+  background: var(--paper-bg);
+  border: 2px solid var(--paper-border);
+  border-radius: var(--radius-card);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.paper-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(rgba(201, 107, 133, 0.03) 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+.card-header-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  animation: bounceSoft 3s ease-in-out infinite;
+}
+
+@keyframes bounceSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.handwritten-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-rose-dark);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.card-body {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.card-body p {
+  margin-bottom: 14px;
+}
+
+.card-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. BUTTONS & INTERACTION STYLES
+   -------------------------------------------------------------------------- */
+.btn {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  text-decoration: none;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-rose) 0%, var(--color-rose-dark) 100%);
+  color: #FFF;
+  box-shadow: 0 8px 20px rgba(201, 107, 133, 0.3);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(201, 107, 133, 0.45);
+  outline: none;
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-send {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFF;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+}
+
+.btn-send:hover, .btn-send:focus {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+}
+
+.btn-secondary {
+  background: #E8F5E9;
+  color: #1B5E20;
+  border: 1px solid #A5D6A7;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.15);
+}
+
+.btn-secondary:hover {
+  background: #C8E6C9;
+}
+
+.btn-restart {
+  background: transparent;
+  border: 2px solid var(--color-rose);
+  color: var(--color-rose-dark);
+  font-size: 0.95rem;
+  padding: 10px 24px;
+  min-height: 44px;
+}
+
+.btn-restart:hover {
+  background: var(--color-blush);
+}
+
+/* --------------------------------------------------------------------------
+   8. SPECIFIC SCREEN DESIGNS
+   -------------------------------------------------------------------------- */
+
+/* SCREEN 1: ENVELOPE */
+.envelope-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 100%;
+  perspective: 1000px;
+}
+
+.envelope {
+  width: 290px;
+  height: 200px;
+  position: relative;
+  background: #FCE8EE;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.envelope-wrapper:hover .envelope {
+  transform: translateY(-8px) rotate(-1deg);
+}
+
+.envelope-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #F7D6E0;
+  border-radius: 12px;
+}
+
+.letter-preview {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  right: 20px;
+  height: 160px;
+  background: var(--paper-bg);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(0);
+}
+
+.preview-text {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--color-rose-dark);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.envelope-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 145px solid transparent;
+  border-right: 145px solid transparent;
+  border-top: 115px solid #F3C4D3;
+  transform-origin: top;
+  transition: transform 0.6s ease-in-out;
+  z-index: 5;
+}
+
+.envelope-front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 145px solid #F8DAE4;
+  border-right: 145px solid #F8DAE4;
+  border-bottom: 110px solid #F6CFDC;
+  border-radius: 0 0 12px 12px;
+  z-index: 4;
+}
+
+.wax-seal {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle, #D48C9A 0%, #A64B62 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(166, 75, 98, 0.4);
+  z-index: 6;
+  transition: transform 0.4s ease;
+}
+
+.seal-heart {
+  font-size: 1.3rem;
+  color: #FFF;
+}
+
+.envelope-tag {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.envelope-tag h2 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  color: var(--color-rose-dark);
+}
+
+.tap-hint {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  animation: pulseHint 2s infinite;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.envelope-wrapper.open .envelope-top {
+  transform: rotateX(180deg);
+  z-index: 2;
+}
+
+.envelope-wrapper.open .letter-preview {
+  transform: translateY(-80px);
+  z-index: 3;
+}
+
+.envelope-wrapper.open .wax-seal {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.5);
+}
+
+/* SCREEN 2: TYPEWRITER */
+.typewriter-box {
+  min-height: 140px;
+  background: rgba(255, 240, 243, 0.4);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--paper-border);
+}
+
+.typewriter-content {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.cursor {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-rose-dark);
+  animation: blink 0.8s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* SCREEN 4: QUOTE BOX */
+.quote-box {
+  background: var(--color-blush);
+  border-left: 4px solid var(--color-rose);
+  padding: 16px 20px;
+  border-radius: 0 16px 16px 0;
+  margin-bottom: 18px;
+}
+
+.quote-text {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--color-rose-dark);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* SCREEN 5: SEQUENTIAL REVEAL CARDS */
+.reveal-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.reveal-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--color-blush);
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(232, 165, 184, 0.25);
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-card-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.reveal-card-content h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-rose-dark);
+  margin-bottom: 2px;
+}
+
+.reveal-card-content p {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+/* SCREEN 6: PROMISES LIST */
+.promise-list {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.promise-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(240, 230, 255, 0.4);
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(212, 140, 154, 0.2);
+}
+
+.promise-heart {
+  font-size: 1.1rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.promise-text {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+/* SCREEN 7: TENDER / MEMORY BOX */
+.memory-box {
+  background: #FFF8EA;
+  border: 2px dashed var(--color-gold);
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.memory-pin {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.3rem;
+}
+
+.memory-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: #B38600;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.memory-content {
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+/* SCREEN 8: FLOATING HEARTS DEMO */
+.highlight-text {
+  font-family: var(--font-heading);
+  font-size: 2.1rem;
+  color: var(--color-rose-dark);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 12px !important;
+}
+
+.sub-care-text {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+.floating-hearts-container {
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.screen-heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 1.5rem;
+  animation: floatUp 3s ease-in infinite;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  30% { opacity: 0.9; }
+  100% { transform: translateY(-90px) scale(1.3); opacity: 0; }
+}
+
+/* SCREEN 9: CHOICES GRID */
+.choices-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.choice-card {
+  background: var(--paper-bg);
+  border: 2px solid var(--paper-border);
+  border-radius: 18px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-align: left;
+}
+
+.choice-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-rose);
+}
+
+.choice-card.selected {
+  background: var(--color-blush);
+  border-color: var(--color-rose-dark);
+  box-shadow: var(--shadow-glow);
+}
+
+.choice-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.choice-emoji {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.choice-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.choice-response {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--color-rose);
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  color: var(--color-rose-dark);
+  font-weight: 600;
+  line-height: 1.3;
+  animation: fadeIn 0.4s ease;
+}
+
+.choice-response.hidden, .custom-input-box.hidden, .validation-error.hidden, .feedback-msg.hidden, .fallback-box.hidden, .btn-spinner.hidden {
+  display: none !important;
+}
+
+.custom-input-box {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.custom-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-rose);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: #FFF;
+  resize: none;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.custom-textarea:focus {
+  border-color: var(--color-rose-dark);
+  box-shadow: 0 0 10px rgba(201, 107, 133, 0.2);
+}
+
+.validation-error {
+  background: #FFEBEB;
+  color: #D93838;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  border: 1px solid #FFC2C2;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* SCREEN 10: SUMMARY & SEND */
+.summary-box {
+  background: var(--color-blush);
+  border: 1px solid var(--paper-border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.98rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.summary-item:last-child {
+  margin-bottom: 0;
+}
+
+.summary-custom {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-rose);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.send-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.feedback-msg {
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.feedback-msg.success {
+  background: #EBFBEE;
+  color: #2B8A3E;
+  border: 1px solid #C3FAAE;
+}
+
+.feedback-msg.info {
+  background: #E8F5E9;
+  color: #1B5E20;
+  border: 1px solid #A5D6A7;
+}
+
+.fallback-box {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--paper-border);
+}
+
+.fallback-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* SCREEN 11: GRAND FINALE */
+.grand-title {
+  font-size: 3.2rem;
+  color: var(--color-rose-dark);
+  margin-bottom: 4px;
+}
+
+.grand-subtitle {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.final-heart-burst {
+  margin: 20px 0;
+}
+
+.heart-pulse {
+  font-size: 4.5rem;
+  display: inline-block;
+  animation: pulseGrand 1.8s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes pulseGrand {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.2); filter: drop-shadow(0 0 15px rgba(201, 107, 133, 0.6)); }
+  100% { transform: scale(0.95); }
+}
+
+.signature-line {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  color: var(--color-rose-dark);
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+.final-replay-wrapper {
+  margin-top: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   9. PREFERS REDUCED MOTION ACCESSIBILITY
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  #particleCanvas, .petal-overlay {
+    display: none !important;
+  }
+  
+  .screen {
+    transition: opacity 0.1s ease !important;
+    transform: none !important;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Floating Particles Canvas / Overlay -->
+  <canvas id="particleCanvas"></canvas>
+  <div id="petalOverlay" class="petal-overlay"></div>
+
+  <!-- Background Music Audio Element -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Mute / Unmute Floating Control -->
+  <button id="musicToggle" class="music-toggle" aria-label="Toggle Background Music">
+    <span class="music-icon" id="musicIcon">🎵</span>
+    <span class="music-text" id="musicText">Sound On</span>
+  </button>
+
+  <!-- Main Container Card -->
+  <main class="app-container">
+
+    <!-- Progress Dots Bar (Hidden on Screen 1 Envelope) -->
+    <nav class="progress-bar hidden" id="progressBar" aria-label="Card Progress">
+      <div class="dot active" data-screen="1"></div>
+      <div class="dot" data-screen="2"></div>
+      <div class="dot" data-screen="3"></div>
+      <div class="dot" data-screen="4"></div>
+      <div class="dot" data-screen="5"></div>
+      <div class="dot" data-screen="6"></div>
+      <div class="dot" data-screen="7"></div>
+      <div class="dot" data-screen="8"></div>
+      <div class="dot" data-screen="9"></div>
+      <div class="dot" data-screen="10"></div>
+      <div class="dot" data-screen="11"></div>
+    </nav>
+
+    <!-- SCREEN 1: ENVELOPE OPENING -->
+    <section id="screen1" class="screen active" aria-label="Screen 1: Sealed Envelope">
+      <div class="envelope-wrapper" id="envelope">
+        <div class="envelope">
+          <div class="envelope-back"></div>
+          <div class="letter-preview">
+            <p class="preview-text">My Dearest Sneha…</p>
+          </div>
+          <div class="envelope-front"></div>
+          <div class="envelope-top"></div>
+          <div class="wax-seal">
+            <span class="seal-heart">🤍</span>
+          </div>
+        </div>
+        <div class="envelope-tag">
+          <h2>For Sneha 🤍</h2>
+          <p class="tap-hint">Tap the envelope to open</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: LISTENING & HERE FOR YOU -->
+    <section id="screen2" class="screen" aria-label="Screen 2: Listening to you">
+      <div class="card paper-card">
+        <div class="card-header-icon">🕊️</div>
+        <h1 class="handwritten-title">My Dearest Sneha,</h1>
+        <div class="typewriter-box">
+          <p id="typewriterText" class="typewriter-content"></p>
+          <span class="cursor" id="typewriterCursor">|</span>
+        </div>
+        <button class="btn btn-primary nav-btn" data-next="3">
+          Continue 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: THE APOLOGY -->
+    <section id="screen3" class="screen" aria-label="Screen 3: I am sorry">
+      <div class="card paper-card">
+        <div class="card-header-icon">🌸</div>
+        <h2 class="handwritten-title">I'm Sorry</h2>
+        <div class="card-body">
+          <p>You told me how you felt, and I didn't make you feel heard. That's on me, not you.</p>
+          <p>I know there were moments where you felt unheard, blamed, and not valued by me. It hurts my heart to know I caused you that feeling, because you deserve nothing but warmth, patience, and love.</p>
+          <p>I take full ownership of my mistakes. No excuses, no deflecting. I am truly, deeply sorry, my love.</p>
+        </div>
+        <button class="btn btn-primary nav-btn" data-next="4">
+          Continue 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: YOU ARE NOT THE PROBLEM -->
+    <section id="screen4" class="screen" aria-label="Screen 4: You are not the problem">
+      <div class="card paper-card highlight-card">
+        <div class="card-header-icon">✨</div>
+        <h2 class="handwritten-title">You Are Not The Problem</h2>
+        <div class="card-body">
+          <div class="quote-box">
+            <p class="quote-text">"Your feelings are always valid, always safe with me, and always welcome."</p>
+          </div>
+          <p>You never have to apologize for expressing how you feel, or for being upset when I drop the ball. Expressing your heart is not "being difficult"—it is you trusting me with your feelings.</p>
+          <p>I want to be your safe space, never the person you have to protect yourself from.</p>
+        </div>
+        <button class="btn btn-primary nav-btn" data-next="5">
+          Continue 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: WHAT I WANT YOU TO FEEL -->
+    <section id="screen5" class="screen" aria-label="Screen 5: What I want you to feel from now on">
+      <div class="card paper-card">
+        <div class="card-header-icon">🌿</div>
+        <h2 class="handwritten-title">What I Want You To Feel From Now On</h2>
+        <p class="subtitle">Step by step, every single day...</p>
+
+        <div class="reveal-cards-container">
+          <div class="reveal-card" id="feelCard1">
+            <div class="reveal-card-icon">👂🤍</div>
+            <div class="reveal-card-content">
+              <h3>Heard</h3>
+              <p>Every word, every feeling, every quiet thought. I am here to listen with an open heart.</p>
+            </div>
+          </div>
+
+          <div class="reveal-card" id="feelCard2">
+            <div class="reveal-card-icon">👑💗</div>
+            <div class="reveal-card-content">
+              <h3>Valued</h3>
+              <p>You matter to me more than I show sometimes, and I'm going to show it so much better.</p>
+            </div>
+          </div>
+
+          <div class="reveal-card" id="feelCard3">
+            <div class="reveal-card-icon">🛡️💖</div>
+            <div class="reveal-card-content">
+              <h3>Safe</h3>
+              <p>You will never have to feel blamed or defensive with me. My arms are your sanctuary.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary nav-btn" data-next="6">
+          Continue 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 6: MY PROMISE TO YOU -->
+    <section id="screen6" class="screen" aria-label="Screen 6: My promises to you">
+      <div class="card paper-card promises-card">
+        <div class="card-header-icon">📜</div>
+        <h2 class="handwritten-title">My Promise To You</h2>
+        
+        <ul class="promise-list">
+          <li class="promise-item">
+            <span class="promise-heart">🤍</span>
+            <span class="promise-text">I will listen first, before offering words or reactions.</span>
+          </li>
+          <li class="promise-item">
+            <span class="promise-heart">🤍</span>
+            <span class="promise-text">I will never make you feel small or unimportant.</span>
+          </li>
+          <li class="promise-item">
+            <span class="promise-heart">🤍</span>
+            <span class="promise-text">I will take care of your heart, always and without condition.</span>
+          </li>
+          <li class="promise-item">
+            <span class="promise-heart">🤍</span>
+            <span class="promise-text">You can be soft, silly, sad, or small around me, and I'll hold you through all of it.</span>
+          </li>
+        </ul>
+
+        <button class="btn btn-primary nav-btn" data-next="7">
+          Continue 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 7: LITTLE GIRL / SAFE PLACE -->
+    <section id="screen7" class="screen" aria-label="Screen 7: You will always be my little girl">
+      <div class="card paper-card tender-card">
+        <div class="card-header-icon">🧸</div>
+        <h2 class="handwritten-title">You'll Always Be My Little Girl 🧸</h2>
+        <div class="card-body">
+          <p>I want to protect your softness. I want to be the place where you can drop your shield, rest your head, and just be gently taken care of.</p>
+          <p>Whenever the world feels loud or overwhelming, remember that you have a safe harbor right here in my arms.</p>
+          
+          <!-- Sweet Personal Memory Box -->
+          <div class="memory-box">
+            <span class="memory-pin">📌</span>
+            <p class="memory-title">A Little Memory I Cherish</p>
+            <p class="memory-content" id="personalMemoryText">
+              [ADD A SWEET MEMORY OF US HERE]
+            </p>
+          </div>
+        </div>
+        <button class="btn btn-primary nav-btn" data-next="8">
+          Continue 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 8: UNCONDITIONAL CARE -->
+    <section id="screen8" class="screen" aria-label="Screen 8: I care about you so much">
+      <div class="card paper-card care-card">
+        <div class="card-header-icon">💓</div>
+        <h2 class="handwritten-title">Always Cared For</h2>
+        <div class="card-body large-text">
+          <p class="highlight-text">"I care about you so much, Sneha. You will always, always be cared for."</p>
+          <p class="sub-care-text">No matter what happens, my love for you is patient, soft, and unwavering.</p>
+        </div>
+        <div class="floating-hearts-container" id="screen8Hearts"></div>
+        <button class="btn btn-primary nav-btn" data-next="9">
+          Continue 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 9: THE FINAL QUESTION -->
+    <section id="screen9" class="screen" aria-label="Screen 9: What do you want most right now">
+      <div class="card paper-card choices-card">
+        <div class="card-header-icon">💭</div>
+        <h2 class="handwritten-title">Sneha… what do you want most right now?</h2>
+        <p class="subtitle">Pick one or more (whatever your heart feels like):</p>
+
+        <div class="choices-grid">
+          <!-- Choice 1 -->
+          <div class="choice-card" data-choice-id="hugs" tabindex="0" role="checkbox" aria-checked="false">
+            <div class="choice-main">
+              <span class="choice-emoji">🤗</span>
+              <span class="choice-title">Hugs & Cuddles</span>
+            </div>
+            <div class="choice-response hidden">
+              Then that's exactly what I'll give you. Come here, my love 🤍
+            </div>
+          </div>
+
+          <!-- Choice 2 -->
+          <div class="choice-card" data-choice-id="chocolates" tabindex="0" role="checkbox" aria-checked="false">
+            <div class="choice-main">
+              <span class="choice-emoji">🍫</span>
+              <span class="choice-title">Chocolates & Cake</span>
+            </div>
+            <div class="choice-response hidden">
+              Sweet treats for my sweet girl. Consider it done 🍫🍰
+            </div>
+          </div>
+
+          <!-- Choice 3 -->
+          <div class="choice-card" data-choice-id="talk" tabindex="0" role="checkbox" aria-checked="false">
+            <div class="choice-main">
+              <span class="choice-emoji">🌙</span>
+              <span class="choice-title">A long, quiet cuddle where you just talk and I just listen</span>
+            </div>
+            <div class="choice-response hidden">
+              I will hold you close and listen to every single word 🤍
+            </div>
+          </div>
+
+          <!-- Choice 4 -->
+          <div class="choice-card" data-choice-id="movie" tabindex="0" role="checkbox" aria-checked="false">
+            <div class="choice-main">
+              <span class="choice-emoji">🎬</span>
+              <span class="choice-title">Movie night under a blanket</span>
+            </div>
+            <div class="choice-response hidden">
+              Blankets, snacks, cuddles, and your favorite movie ready 🍿✨
+            </div>
+          </div>
+
+          <!-- Choice 5 -->
+          <div class="choice-card" data-choice-id="date" tabindex="0" role="checkbox" aria-checked="false">
+            <div class="choice-main">
+              <span class="choice-emoji">🌹</span>
+              <span class="choice-title">A little date, just us</span>
+            </div>
+            <div class="choice-response hidden">
+              Just you and me, making sweet memories together 🌹
+            </div>
+          </div>
+
+          <!-- Choice 6 -->
+          <div class="choice-card" data-choice-id="kisses" tabindex="0" role="checkbox" aria-checked="false">
+            <div class="choice-main">
+              <span class="choice-emoji">💋</span>
+              <span class="choice-title">Forehead kisses and being held</span>
+            </div>
+            <div class="choice-response hidden">
+              Gentle kisses and warm hugs whenever you need them 💋
+            </div>
+          </div>
+
+          <!-- Choice 7: Custom -->
+          <div class="choice-card choice-custom" data-choice-id="custom" tabindex="0" role="checkbox" aria-checked="false">
+            <div class="choice-main">
+              <span class="choice-emoji">✍️</span>
+              <span class="choice-title">Something else...</span>
+            </div>
+            <div class="custom-input-box hidden" id="customInputWrapper">
+              <textarea id="customText" class="custom-textarea" placeholder="Tell me what you're wishing for, my love... 💭" rows="3"></textarea>
+            </div>
+            <div class="choice-response hidden">
+              Whatever your heart desires, I'm here for it 💌
+            </div>
+          </div>
+        </div>
+
+        <div id="choiceValidationError" class="validation-error hidden">
+          Pick at least one, my love 🥺
+        </div>
+
+        <button class="btn btn-primary nav-btn" id="toSendBtn">
+          Continue 🤍
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 10: SEND BACK TO HIM -->
+    <section id="screen10" class="screen" aria-label="Screen 10: Send my answer">
+      <div class="card paper-card send-card">
+        <div class="card-header-icon">💬</div>
+        <h2 class="handwritten-title">Send Your Answer To Me</h2>
+        <div class="card-body">
+          <p>Here is what you picked, my love:</p>
+          
+          <div id="selectionSummary" class="summary-box">
+            <!-- Dynamically populated -->
+          </div>
+
+          <p class="send-note">Tap the button below—it will copy your answer and open WhatsApp so you can send it to me 🥺💗</p>
+
+          <div id="sendFeedback" class="feedback-msg hidden"></div>
+
+          <button id="sendAnswerBtn" class="btn btn-send">
+            <span class="btn-text">Send to him on WhatsApp 💬</span>
+          </button>
+          
+          <div id="fallbackContainer" class="fallback-box hidden">
+            <p class="fallback-text">Tap below if WhatsApp didn't open automatically: 🤍</p>
+            <a id="whatsappDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              Open WhatsApp Chat 📱
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 11: FINAL LOVE DECLARATION -->
+    <section id="screen11" class="screen" aria-label="Screen 11: Final love message">
+      <div class="card paper-card final-card">
+        <div class="card-header-icon">💖</div>
+        <h1 class="handwritten-title grand-title">I Love You, Sneha.</h1>
+        <p class="grand-subtitle">Now and always.</p>
+
+        <div class="final-heart-burst">
+          <span class="heart-pulse">❤️</span>
+        </div>
+
+        <p class="signature-line" id="signatureText">— [YOUR NAME]</p>
+
+        <div class="final-replay-wrapper">
+          <button id="restartBtn" class="btn btn-restart">
+            Read from the beginning 📖
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+/* ==========================================================================
+   SCRIPT.JS - Romantic Apology Digital Love Card for Sneha
+   State management, smooth transitions, typewriter engine, interactive choices,
+   Clipboard copying + Direct WhatsApp message opening.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CONFIG BLOCK - CUSTOMIZE YOUR DETAILS HERE
+   -------------------------------------------------------------------------- */
+const CONFIG = {
+  // Your name as it should appear on the final screen signature
+  YOUR_NAME: "Your Name",
+
+  // Your WhatsApp Phone Number with Country Code (without + or spaces)
+  // Default set to: 919736360809
+  WHATSAPP_NUMBER: "919736360809",
+
+  // Background Music file path
+  MUSIC_FILE: "music.mp3",
+
+  // Personal sweet memory to display on Screen 7
+  PERSONAL_MEMORY: "Remember that chilly evening when we sat together, shared warm chai, and talked about everything and nothing? I felt so close to you that day, and I promise to keep building moments like that with you."
+};
+
+/* --------------------------------------------------------------------------
+   APP STATE & DOM ELEMENTS
+   -------------------------------------------------------------------------- */
+let currentScreen = 1;
+let typewriterActive = false;
+let typewriterTimeout = null;
+let fullTypewriterText = "Sneha… before anything else, I just want you to know I'm here, and I'm listening.";
+
+const selectedChoices = new Set();
+let customWriteInText = "";
+
+/* --------------------------------------------------------------------------
+   INITIALIZATION
+   -------------------------------------------------------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+  initApp();
+  initParticles();
+  initMusicPlayer();
+});
+
+function initApp() {
+  const signatureEl = document.getElementById("signatureText");
+  if (signatureEl) {
+    signatureEl.textContent = `— ${CONFIG.YOUR_NAME}`;
+  }
+
+  const memoryEl = document.getElementById("personalMemoryText");
+  if (memoryEl && CONFIG.PERSONAL_MEMORY && CONFIG.PERSONAL_MEMORY !== "[ADD A SWEET MEMORY OF US HERE]") {
+    memoryEl.textContent = CONFIG.PERSONAL_MEMORY;
+  }
+
+  setupEnvelopeListener();
+  setupNavigationButtons();
+  setupChoicesGrid();
+  setupSendLogic();
+  setupRestartButton();
+}
+
+/* --------------------------------------------------------------------------
+   SCREEN NAVIGATION & FLOW ENGINE
+   -------------------------------------------------------------------------- */
+function goToScreen(screenNumber) {
+  if (screenNumber < 1 || screenNumber > 11) return;
+
+  const currentEl = document.getElementById(`screen${currentScreen}`);
+  const nextEl = document.getElementById(`screen${screenNumber}`);
+
+  if (!nextEl) return;
+
+  if (currentEl) {
+    currentEl.style.opacity = "0";
+    currentEl.style.transform = "translateY(-15px)";
+    setTimeout(() => {
+      currentEl.classList.remove("active");
+    }, 300);
+  }
+
+  setTimeout(() => {
+    nextEl.classList.add("active");
+    void nextEl.offsetWidth;
+    nextEl.style.opacity = "1";
+    nextEl.style.transform = "translateY(0)";
+    
+    currentScreen = screenNumber;
+    updateProgressBar();
+    handleScreenSpecificTriggers(screenNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, 320);
+}
+
+function updateProgressBar() {
+  const progressBar = document.getElementById("progressBar");
+  if (!progressBar) return;
+
+  if (currentScreen === 1) {
+    progressBar.classList.add("hidden");
+  } else {
+    progressBar.classList.remove("hidden");
+  }
+
+  const dots = progressBar.querySelectorAll(".dot");
+  dots.forEach((dot, idx) => {
+    const dotScreen = idx + 1;
+    dot.classList.remove("active", "completed");
+    if (dotScreen === currentScreen) {
+      dot.classList.add("active");
+    } else if (dotScreen < currentScreen) {
+      dot.classList.add("completed");
+    }
+  });
+}
+
+function handleScreenSpecificTriggers(screenNumber) {
+  switch (screenNumber) {
+    case 2:
+      startTypewriterEffect();
+      break;
+    case 5:
+      triggerSequentialReveal();
+      break;
+    case 8:
+      triggerScreen8Hearts();
+      break;
+    case 10:
+      populateSelectionSummary();
+      break;
+    case 11:
+      triggerFinalBurst();
+      break;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SCREEN 1: ENVELOPE OPENING LOGIC
+   -------------------------------------------------------------------------- */
+function setupEnvelopeListener() {
+  const envelope = document.getElementById("envelope");
+  if (!envelope) return;
+
+  envelope.addEventListener("click", () => {
+    if (envelope.classList.contains("open")) return;
+    
+    envelope.classList.add("open");
+    
+    setTimeout(() => {
+      goToScreen(2);
+    }, 700);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   SCREEN 2: TYPEWRITER TEXT ENGINE
+   -------------------------------------------------------------------------- */
+function startTypewriterEffect() {
+  const textEl = document.getElementById("typewriterText");
+  const cursorEl = document.getElementById("typewriterCursor");
+  if (!textEl) return;
+
+  textEl.textContent = "";
+  if (cursorEl) cursorEl.style.display = "inline";
+
+  let charIndex = 0;
+  typewriterActive = true;
+
+  function typeChar() {
+    if (!typewriterActive) return;
+
+    if (charIndex < fullTypewriterText.length) {
+      textEl.textContent += fullTypewriterText.charAt(charIndex);
+      charIndex++;
+      const speed = Math.floor(Math.random() * 40) + 45;
+      typewriterTimeout = setTimeout(typeChar, speed);
+    } else {
+      typewriterActive = false;
+      if (cursorEl) {
+        setTimeout(() => { cursorEl.style.display = "none"; }, 1500);
+      }
+    }
+  }
+
+  if (typewriterTimeout) clearTimeout(typewriterTimeout);
+  typeChar();
+}
+
+function completeTypewriterInstantly() {
+  if (!typewriterActive) return;
+  typewriterActive = false;
+  if (typewriterTimeout) clearTimeout(typewriterTimeout);
+
+  const textEl = document.getElementById("typewriterText");
+  const cursorEl = document.getElementById("typewriterCursor");
+  if (textEl) textEl.textContent = fullTypewriterText;
+  if (cursorEl) cursorEl.style.display = "none";
+}
+
+/* --------------------------------------------------------------------------
+   SCREEN 5: SEQUENTIAL REVEAL CARDS
+   -------------------------------------------------------------------------- */
+function triggerSequentialReveal() {
+  const cards = [
+    document.getElementById("feelCard1"),
+    document.getElementById("feelCard2"),
+    document.getElementById("feelCard3")
+  ];
+
+  cards.forEach((card) => {
+    if (card) card.classList.remove("visible");
+  });
+
+  cards.forEach((card, index) => {
+    if (card) {
+      setTimeout(() => {
+        card.classList.add("visible");
+      }, (index + 1) * 350);
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   SCREEN 8: FLOATING HEARTS ANIMATION
+   -------------------------------------------------------------------------- */
+function triggerScreen8Hearts() {
+  const container = document.getElementById("screen8Hearts");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const heartSymbols = ["🤍", "💖", "🌸", "💓", "✨"];
+  for (let i = 0; i < 8; i++) {
+    const span = document.createElement("span");
+    span.className = "screen-heart";
+    span.textContent = heartSymbols[i % heartSymbols.length];
+    span.style.left = `${Math.random() * 85 + 5}%`;
+    span.style.animationDelay = `${Math.random() * 2}s`;
+    span.style.animationDuration = `${2.5 + Math.random() * 1.5}s`;
+    container.appendChild(span);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SCREEN 9: INTERACTIVE SELECTION GRID
+   -------------------------------------------------------------------------- */
+function setupChoicesGrid() {
+  const choiceCards = document.querySelectorAll(".choice-card");
+  const errorEl = document.getElementById("choiceValidationError");
+
+  choiceCards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      if (e.target.tagName.toLowerCase() === "textarea") return;
+
+      const choiceId = card.getAttribute("data-choice-id");
+      const isSelected = card.classList.contains("selected");
+
+      if (isSelected) {
+        card.classList.remove("selected");
+        card.setAttribute("aria-checked", "false");
+        selectedChoices.delete(choiceId);
+        
+        const resp = card.querySelector(".choice-response");
+        if (resp) resp.classList.add("hidden");
+
+        if (choiceId === "custom") {
+          const customBox = document.getElementById("customInputWrapper");
+          if (customBox) customBox.classList.add("hidden");
+        }
+      } else {
+        card.classList.add("selected");
+        card.setAttribute("aria-checked", "true");
+        selectedChoices.add(choiceId);
+
+        const resp = card.querySelector(".choice-response");
+        if (resp) resp.classList.remove("hidden");
+
+        if (choiceId === "custom") {
+          const customBox = document.getElementById("customInputWrapper");
+          if (customBox) {
+            customBox.classList.remove("hidden");
+            const textarea = document.getElementById("customText");
+            if (textarea) textarea.focus();
+          }
+        }
+      }
+
+      if (selectedChoices.size > 0 && errorEl) {
+        errorEl.classList.add("hidden");
+      }
+    });
+
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        if (e.target.tagName.toLowerCase() !== "textarea") {
+          e.preventDefault();
+          card.click();
+        }
+      }
+    });
+  });
+
+  const toSendBtn = document.getElementById("toSendBtn");
+  if (toSendBtn) {
+    toSendBtn.addEventListener("click", () => {
+      if (selectedChoices.size === 0) {
+        if (errorEl) {
+          errorEl.classList.remove("hidden");
+        }
+      } else {
+        if (errorEl) errorEl.classList.add("hidden");
+        goToScreen(10);
+      }
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SCREEN 10: SELECTION SUMMARY & WHATSAPP COPY + DIRECT OPEN LOGIC
+   -------------------------------------------------------------------------- */
+const CHOICE_LABELS = {
+  hugs: "🤗 Hugs & Cuddles",
+  chocolates: "🍫 Chocolates & Cake",
+  talk: "🌙 A long, quiet cuddle where you just talk and I just listen",
+  movie: "🎬 Movie night under a blanket",
+  date: "🌹 A little date, just us",
+  kisses: "💋 Forehead kisses and being held",
+  custom: "✍️ Something else..."
+};
+
+function populateSelectionSummary() {
+  const summaryEl = document.getElementById("selectionSummary");
+  if (!summaryEl) return;
+
+  summaryEl.innerHTML = "";
+
+  if (selectedChoices.size === 0) {
+    summaryEl.innerHTML = `<p class="summary-item">No choices selected yet 🥺</p>`;
+    return;
+  }
+
+  selectedChoices.forEach((id) => {
+    const item = document.createElement("div");
+    item.className = "summary-item";
+    item.innerHTML = `<span>🤍</span> <span>${CHOICE_LABELS[id] || id}</span>`;
+    summaryEl.appendChild(item);
+  });
+
+  const customTextEl = document.getElementById("customText");
+  if (selectedChoices.has("custom") && customTextEl && customTextEl.value.trim() !== "") {
+    customWriteInText = customTextEl.value.trim();
+    const customDiv = document.createElement("div");
+    customDiv.className = "summary-custom";
+    customDiv.innerHTML = `<strong>Her wish:</strong> "${customWriteInText}"`;
+    summaryEl.appendChild(customDiv);
+  }
+}
+
+function setupSendLogic() {
+  const sendBtn = document.getElementById("sendAnswerBtn");
+  const feedbackEl = document.getElementById("sendFeedback");
+  const fallbackBox = document.getElementById("fallbackContainer");
+  const whatsappLink = document.getElementById("whatsappDirectLink");
+
+  if (!sendBtn) return;
+
+  sendBtn.addEventListener("click", () => {
+    if (selectedChoices.size === 0) {
+      goToScreen(9);
+      return;
+    }
+
+    const choiceNames = Array.from(selectedChoices).map((id) => CHOICE_LABELS[id] || id);
+    const customTextEl = document.getElementById("customText");
+    const customVal = (selectedChoices.has("custom") && customTextEl) ? customTextEl.value.trim() : "";
+
+    let messageText = `💌 Sneha chose:\n` + choiceNames.map(c => `• ${c}`).join("\n");
+    if (customVal) {
+      messageText += `\n\n✍️ Custom note: "${customVal}"`;
+    }
+    messageText += `\n\n🥺💗`;
+
+    // Step 1: Copy full answer to clipboard
+    copyToClipboard(messageText);
+
+    // Step 2: Build WhatsApp URL to target number +919736360809
+    const cleanPhone = CONFIG.WHATSAPP_NUMBER.replace(/[^0-9]/g, "");
+    const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(messageText)}`;
+
+    // Show feedback
+    if (feedbackEl) {
+      feedbackEl.className = "feedback-msg info";
+      feedbackEl.textContent = "Copied your answer & opening WhatsApp! 💬";
+      feedbackEl.classList.remove("hidden");
+    }
+
+    if (fallbackBox) fallbackBox.classList.remove("hidden");
+    if (whatsappLink) {
+      whatsappLink.href = waUrl;
+    }
+
+    // Step 3: Open WhatsApp directly
+    window.open(waUrl, "_blank");
+
+    // Add continue button to advance to Screen 11
+    setTimeout(() => {
+      const continueBtn = document.createElement("button");
+      continueBtn.className = "btn btn-primary nav-btn";
+      continueBtn.style.marginTop = "16px";
+      continueBtn.textContent = "Continue to my love note 🤍";
+      continueBtn.addEventListener("click", () => goToScreen(11));
+      
+      if (fallbackBox && !fallbackBox.querySelector(".nav-btn")) {
+        fallbackBox.appendChild(continueBtn);
+      }
+    }, 600);
+  });
+}
+
+function copyToClipboard(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(err => console.warn("Clipboard copy failed:", err));
+  } else {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+    } catch (err) {
+      console.warn("Fallback execCommand copy failed:", err);
+    }
+    document.body.removeChild(textarea);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SCREEN 11: FINAL BURST ANIMATION & RESTART
+   -------------------------------------------------------------------------- */
+function triggerFinalBurst() {
+  createHeartBurst();
+}
+
+function createHeartBurst() {
+  const symbols = ["🤍", "💖", "🌸", "✨", "❤️", "🧸", "🌹"];
+  for (let i = 0; i < 35; i++) {
+    setTimeout(() => {
+      const el = document.createElement("div");
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.position = "fixed";
+      el.style.left = `${Math.random() * 90 + 5}vw`;
+      el.style.top = `${Math.random() * 80 + 10}vh`;
+      el.style.fontSize = `${Math.random() * 1.5 + 1.2}rem`;
+      el.style.pointerEvents = "none";
+      el.style.zIndex = "999";
+      el.style.transition = "all 2.5s ease-out";
+      el.style.opacity = "1";
+      el.style.transform = "scale(0.5) translateY(0)";
+
+      document.body.appendChild(el);
+
+      requestAnimationFrame(() => {
+        el.style.opacity = "0";
+        el.style.transform = `scale(${Math.random() * 1.5 + 1}) translateY(-${Math.random() * 100 + 80}px) rotate(${Math.random() * 360}deg)`;
+      });
+
+      setTimeout(() => {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }, 2600);
+    }, i * 70);
+  }
+}
+
+function setupRestartButton() {
+  const restartBtn = document.getElementById("restartBtn");
+  if (restartBtn) {
+    restartBtn.addEventListener("click", () => {
+      goToScreen(1);
+      const envelope = document.getElementById("envelope");
+      if (envelope) envelope.classList.remove("open");
+    });
+  }
+}
+
+function setupNavigationButtons() {
+  const navBtns = document.querySelectorAll(".nav-btn[data-next]");
+
+  navBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (currentScreen === 2 && typewriterActive) {
+        completeTypewriterInstantly();
+      }
+
+      const nextScreen = parseInt(btn.getAttribute("data-next"), 10);
+      if (nextScreen) {
+        goToScreen(nextScreen);
+      }
+    });
+  });
+}
+
+function initMusicPlayer() {
+  const bgMusic = document.getElementById("bgMusic");
+  const musicToggle = document.getElementById("musicToggle");
+  const musicText = document.getElementById("musicText");
+
+  if (!bgMusic || !musicToggle) return;
+
+  if (CONFIG.MUSIC_FILE && CONFIG.MUSIC_FILE !== "music.mp3") {
+    bgMusic.src = CONFIG.MUSIC_FILE;
+  }
+
+  musicToggle.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play().then(() => {
+        musicToggle.classList.add("playing");
+        if (musicText) musicText.textContent = "Sound On";
+      }).catch((err) => {
+        console.warn("Audio playback blocked by browser:", err);
+      });
+    } else {
+      bgMusic.pause();
+      musicToggle.classList.remove("playing");
+      if (musicText) musicText.textContent = "Sound Off";
+    }
+  });
+}
+
+function initParticles() {
+  const canvas = document.getElementById("particleCanvas");
+  if (!canvas) return;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  const ctx = canvas.getContext("2d");
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const particles = [];
+  const particleCount = 20;
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + Math.random() * 50;
+      this.size = Math.random() * 12 + 8;
+      this.speedY = Math.random() * 0.8 + 0.3;
+      this.speedX = Math.sin(Math.random() * Math.PI) * 0.4;
+      this.opacity = Math.random() * 0.5 + 0.3;
+      this.rotation = Math.random() * 360;
+      this.rotationSpeed = (Math.random() - 0.5) * 1.5;
+      this.type = Math.random() > 0.4 ? "heart" : "sparkle";
+    }
+
+    update() {
+      this.y -= this.speedY;
+      this.x += this.speedX + Math.sin(this.y * 0.01) * 0.2;
+      this.rotation += this.rotationSpeed;
+
+      if (this.y < -30) {
+        this.reset();
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate((this.rotation * Math.PI) / 180);
+      ctx.globalAlpha = this.opacity;
+
+      if (this.type === "heart") {
+        ctx.fillStyle = "rgba(232, 165, 184, 0.7)";
+        ctx.beginPath();
+        const topCurveHeight = this.size * 0.3;
+        ctx.moveTo(0, topCurveHeight);
+        ctx.bezierCurveTo(
+          -this.size / 2, -topCurveHeight,
+          -this.size, this.size / 3,
+          0, this.size
+        );
+        ctx.bezierCurveTo(
+          this.size, this.size / 3,
+          this.size / 2, -topCurveHeight,
+          0, topCurveHeight
+        );
+        ctx.closePath();
+        ctx.fill();
+      } else {
+        ctx.fillStyle = "rgba(247, 231, 180, 0.8)";
+        ctx.beginPath();
+        for (let i = 0; i < 4; i++) {
+          ctx.lineTo(Math.cos((i * Math.PI) / 2) * this.size * 0.6, Math.sin((i * Math.PI) / 2) * this.size * 0.6);
+          ctx.lineTo(Math.cos((i * Math.PI) / 2 + Math.PI / 4) * this.size * 0.2, Math.sin((i * Math.PI) / 2 + Math.PI / 4) * this.size * 0.2);
+        }
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    const p = new Particle();
+    p.y = Math.random() * height;
+    particles.push(p);
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach((p) => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+  </script>
+</body>
+</html>
